@@ -4,7 +4,7 @@ import ProductList from './components/ProductList'
 import CategoriesFilter from './components/CategoriesFilter'
 import PriceFilter from './components/PriceFilter'
 import { parsePrice } from './utils/parsePrice'
-import NavBar from './components/NavBar'
+import Cart from './components/Cart'
 import { getProducts } from './services/products'
 import CartContext from './context/CartProvider'
 
@@ -42,7 +42,7 @@ function App() {
   return (
     <div className='App'>
       <h1>Compras</h1>
-      {cart.length > 0 && <NavBar />}
+      {cart.length > 0 && <Cart />}
       <CategoriesFilter setCategoryFilter={setCategoryFilter}/>
       <PriceFilter setPriceFilter={setPriceFilter} />
       <ProductList products={filterProducts} />

@@ -12,3 +12,17 @@ export const getProductById = async (id) => {
   return(data)
 }
 
+export const updateAddProduct = async (id, count) => {
+  const res = await fetch(`${url}/${id}`, {
+    method: 'patch',
+    data: {
+      id: id,
+      rating: {        
+        count: count
+      }
+    }
+  })
+  return res
+}
+
+

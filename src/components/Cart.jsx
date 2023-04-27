@@ -1,7 +1,8 @@
 import { useContext, useEffect } from 'react'
 import CartContext from '../context/CartProvider'
+import { Table } from "react-bootstrap";
 
-const NavBar = () => {
+const Cart = () => {
   const [cart, cartDispatch] = useContext(CartContext)
 
   const onHandleDelete = (id) => {
@@ -9,25 +10,25 @@ const NavBar = () => {
   }
 
   useEffect(() => {
-    console.log("cartis",cart);
     localStorage.setItem("products-cart", JSON.stringify(cart))
   }, [cart])
 
   return (
-    <div className='navbar' style={{ display: 'flex', justifyContent: 'center' , height: 'auto'}}>
-      <table className='cart-table'>
+    <div className='navbar container' style={{ padding: '5px', display: 'flex', justifyContent: 'center' , height: 'auto'}}>
+      <h3>Carrito</h3>
+      <Table className='cart-table' variant='dark' striped bordered hover>
         <thead>
           <tr>
             <th>Producto</th>
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Total</th>
-            <th></th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {
-            cart.map((prod) => {
+            cart.products.map((prod) => {
               return (
                 <tr key={prod.id} style={{ textAlign: 'left' }}>
                   <td>{prod.title} </td>
@@ -40,9 +41,9 @@ const NavBar = () => {
             })
           }
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }
 
-export default NavBar
+export default Cart
