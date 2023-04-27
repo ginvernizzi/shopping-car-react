@@ -37,6 +37,12 @@
   margin: 5px 0px;
 }
 
+.navbar {
+  /* background-color: red; */
+  font-size: larger;
+  height: 90px;
+}
+
 .card {
   padding: 2em;
 }
@@ -99,4 +105,11 @@
   color: white;
 }
 
-
+.btn-eliminar {
+  width: 5vw;
+  height: auto;
+  padding: 15px;
+  background-color: rgb(89, 89, 179);
+  background-color: red;
+  color: white;
+}

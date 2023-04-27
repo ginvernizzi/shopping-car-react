@@ -5,7 +5,6 @@ const priceRanges = ['$0 - $99', '$10 - $19', '$20 - $49', '$50 - $100', '$100 -
 const PriceFilter = ({setPriceFilter}) => {
 
 const managePriceValues = (e) => {
-  // console.log(e.target.value);
   setPriceFilter(e.target.value)
 }
 

@@ -11,7 +11,6 @@ const CategoriesFilter = ({setCategoryFilter}) => {
   }, [])
 
   const onHandleCategory = (e) => {
-    console.log(e.target.value);
     setCategoryFilter(e.target.value)
   }
 
