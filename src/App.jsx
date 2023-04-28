@@ -10,7 +10,7 @@ import CartContext from './context/CartProvider'
 
 
 function App() {
-  const [cart] = useContext(CartContext)
+  const [cart, cartDispatch] = useContext(CartContext)
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
@@ -42,7 +42,7 @@ function App() {
   return (
     <div className='App'>
       <h1>Compras</h1>
-      {cart.length > 0 && <Cart />}
+      <Cart />
       <CategoriesFilter setCategoryFilter={setCategoryFilter}/>
       <PriceFilter setPriceFilter={setPriceFilter} />
       <ProductList products={filterProducts} />

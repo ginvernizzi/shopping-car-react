@@ -3,9 +3,9 @@ import { useContext } from "react"
 import CartContext from "../context/CartProvider";
 
 const Product = ({ product }) => {
-  const [cart, cartDispatch] = useContext(CartContext)
+  const [, cartDispatch] = useContext(CartContext)
 
-  const onAddToCart = (id, title, price ) => {
+  const onAddToCart = (id, title, price) => {
     cartDispatch({ type: "add", payload: { id, title, price } })
     //guardarCartEnAPI
   }

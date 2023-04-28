@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 
+const urlCategories = `https://fakestoreapi.com/products/categories`
 const CategoriesFilter = ({setCategoryFilter}) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products/categories')
+    fetch(urlCategories)
       .then(resp => resp.json())
       .then(data => setCategories(data))
   }, [])
