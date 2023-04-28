@@ -113,3 +113,7 @@
   background-color: red;
   color: white;
 }
+
+.input-quantity {
+  width: 80px;
+}

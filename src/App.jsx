@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import ProductList from './components/ProductList'
 import CategoriesFilter from './components/CategoriesFilter'
@@ -6,11 +6,9 @@ import PriceFilter from './components/PriceFilter'
 import { parsePrice } from './utils/parsePrice'
 import Cart from './components/Cart'
 import { getProducts } from './services/products'
-import CartContext from './context/CartProvider'
 
 
 function App() {
-  const [cart, cartDispatch] = useContext(CartContext)
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')

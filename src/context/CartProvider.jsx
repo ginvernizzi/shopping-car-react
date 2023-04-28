@@ -9,11 +9,11 @@ import { createContext, useReducer } from "react";
 
 const CartContext = createContext();
 
-const getRandomId = () => {
-  const id = Math.floor(Math.random() * 100000);
-  console.log("id", id);
-  return id;
-};
+// const getRandomId = () => {
+//   const id = Math.floor(Math.random() * 100000);
+//   console.log("id", id);
+//   return id;
+// };
 
 const initCart = () => {
   const userCart = localStorage.getItem("products-cart");
@@ -24,7 +24,6 @@ export const CartProvider = ({ children }) => {
   /* eslint-disable no-case-declarations */
   const USER_ID = 1
   const cartReducer = (state, action) => {
-    console.log("state enra el reducer", state);
     const { type, payload } = action;
     switch (type) {
       case "add":
@@ -32,7 +31,7 @@ export const CartProvider = ({ children }) => {
           const newCart = {
             userId: USER_ID,
             date: new Date().toLocaleString('en-GB'),
-            products: [{ productId: payload.id, title: payload.title, price: payload.price, quantity: 1  }]
+            products: [{ productId: payload.id, title: payload.title, price: payload.price, quantity: 1 }]
           }
           return state = newCart
         }
@@ -44,17 +43,20 @@ export const CartProvider = ({ children }) => {
             const products = state.products.map(prod => {
               return prod.productId === payload.id ? { ...prod, quantity: prod.quantity + 1 } : prod
             })
-           return {...state, products: products}
+            return { ...state, products: products }
           }
         }
       case "delete":
-        const newProducts = state.map((x) => {
-          return x.id === payload.id ? { ...x, count: x.count - 1 } : x;
-        });
-        return newProducts.filter((x) => x.count !== 0);
+        const products = state.products.map(prod => {
+          return prod.productId == payload.id ? { ...prod, quantity: prod.quantity - 1 } : prod
+        })
+
+        return { ...state, products: products}
       case "update":
-        state.concat(payload);
-        return;
+        const productsNow = state.products.map(prod => {
+          return prod.productId === payload.id ? { ...prod, quantity: payload.quantity } : prod
+        })
+        return { ...state, products: productsNow }
 
       default:
         break;

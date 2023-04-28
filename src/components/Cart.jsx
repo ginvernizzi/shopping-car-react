@@ -1,18 +1,26 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CartContext from '../context/CartProvider'
 import { Table } from "react-bootstrap";
 
 const Cart = () => {
   const [cart, cartDispatch] = useContext(CartContext)
-  // alert(JSON.stringify(cart))
+  const [editQuantity, setEditQuantity] = useState(null)
 
   const onHandleDelete = (id) => {
+    console.log("id", id);
     cartDispatch({ type: "delete", payload: { id } })
   }
 
-  // useEffect(() => {
-  //   // localStorage.setItem("products-cart", JSON.stringify(cart))
-  // }, [cart])
+  const onChangeQuantity = (e, id) => {
+    if (e.key === 'Enter') {
+      cartDispatch({ type: "update", payload: { id, quantity: e.target.value } })
+      setEditQuantity(null)
+    }
+  }
+
+  useEffect(() => {
+    localStorage.setItem("products-cart", JSON.stringify(cart))
+  }, [cart])
 
   return (
     <div className='navbar container' style={{ padding: '5px', display: 'flex', justifyContent: 'center', height: 'auto' }}>
@@ -33,14 +41,21 @@ const Cart = () => {
               <tr key={prod.productId} style={{ textAlign: 'left' }}>
                 <td>{prod.title} </td>
                 <td>{prod.price} </td>
-                <td>{prod.quantity} </td>
-                <td><button onClick={() => onHandleDelete(prod.id)} className='btn-eliminar'>-</button></td>
+                <td onClick={() => setEditQuantity(prod.productId)}> {
+                  (editQuantity !== null && prod.productId === editQuantity) ? 
+                  <input className='input-quantity' type="text" onKeyDown={(e) => onChangeQuantity(e, prod.productId, 4)} defaultValue={prod.quantity} /> : 
+                  prod.quantity }
+                </td>
+                <td><button onClick={() => onHandleDelete(prod.productId)} className='btn-eliminar'>-</button></td>
               </tr>
             )
             )
           }
         </tbody>
       </Table>
+      <div>
+        {/* <button onClick={} >Aceptar</button> */}
+      </div>
     </div>
   )
 }
