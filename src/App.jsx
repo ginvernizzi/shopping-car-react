@@ -6,12 +6,14 @@ import PriceFilter from './components/PriceFilter'
 import { parsePrice } from './utils/parsePrice'
 import Cart from './components/Cart'
 import { getProducts } from './services/products'
+import NavBar from './components/NavBar'
 
 
 function App() {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
+  const [showCart, setShowCart] = useState(false)
 
   useEffect(() => {
       const traerProducts = async () => {
@@ -20,7 +22,6 @@ function App() {
       }
       traerProducts()
   }, [])  
-
 
   const setCategoryFilter = (filter) => {
     setCategory(filter)
@@ -39,8 +40,8 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Compras</h1>
-      <Cart />
+      <NavBar setShowCart={setShowCart} showCart={showCart}  />
+      { showCart && <Cart setShowCart={setShowCart} showCart={showCart}/> }      
       <CategoriesFilter setCategoryFilter={setCategoryFilter}/>
       <PriceFilter setPriceFilter={setPriceFilter} />
       <ProductList products={filterProducts} />

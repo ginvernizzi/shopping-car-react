@@ -1,19 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useReducer } from "react";
 
-// {
-//   userId:1,
-//   date:2020-02-03,
-//   products: [{productId:5,quantity:1},{productId:1,quantity:5}]
-// }
-
 const CartContext = createContext();
-
-// const getRandomId = () => {
-//   const id = Math.floor(Math.random() * 100000);
-//   console.log("id", id);
-//   return id;
-// };
 
 const initCart = () => {
   const userCart = localStorage.getItem("products-cart");

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import CartContext from '../context/CartProvider'
 import { Table } from "react-bootstrap";
 
-const Cart = () => {
+const Cart = ({showCart, setShowCart }) => {
   const [cart, cartDispatch] = useContext(CartContext)
   const [editQuantity, setEditQuantity] = useState(null)
 
@@ -23,8 +23,8 @@ const Cart = () => {
   }, [cart])
 
   return (
-    <div className='navbar container' style={{ padding: '5px', display: 'flex', justifyContent: 'center', height: 'auto' }}>
-      <h3>Carrito</h3>
+    <div className='cart'>
+      <h3>Carro</h3>
       <Table className='cart-table' variant='dark' striped bordered hover>
         <thead>
           <tr>
@@ -36,7 +36,7 @@ const Cart = () => {
         </thead>
         <tbody>
           {
-            cart.products.map((prod) =>
+            cart.products?.map((prod) =>
             (
               <tr key={prod.productId} style={{ textAlign: 'left' }}>
                 <td>{prod.title} </td>
@@ -54,7 +54,7 @@ const Cart = () => {
         </tbody>
       </Table>
       <div>
-        {/* <button onClick={} >Aceptar</button> */}
+        <button onClick={() => setShowCart(!showCart)}>Close</button>
       </div>
     </div>
   )
