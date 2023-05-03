@@ -39,7 +39,7 @@ export const CartProvider = ({ children }) => {
           return prod.productId == payload.id ? { ...prod, quantity: prod.quantity - 1 } : prod
         })
 
-        return { ...state, products: products}
+        return { ...state, products: products.filter(x => x.quantity > 0)}
       case "update":
         const productsNow = state.products.map(prod => {
           return prod.productId === payload.id ? { ...prod, quantity: payload.quantity } : prod

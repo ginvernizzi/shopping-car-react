@@ -25,7 +25,7 @@ const Cart = ({showCart, setShowCart }) => {
   return (
     <div className='cart'>
       <h3>Carro</h3>
-      <Table className='cart-table' variant='dark' striped bordered hover>
+      <Table className='cart-table' variant='light' striped bordered hover>
         <thead>
           <tr>
             <th>Producto</th>
