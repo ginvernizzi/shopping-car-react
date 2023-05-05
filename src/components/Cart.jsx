@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react'
 import CartContext from '../context/CartProvider'
 import { Table } from "react-bootstrap";
@@ -6,8 +7,9 @@ const Cart = ({showCart, setShowCart }) => {
   const [cart, cartDispatch] = useContext(CartContext)
   const [editQuantity, setEditQuantity] = useState(null)
 
+  console.log("cart", cart);
+
   const onHandleDelete = (id) => {
-    console.log("id", id);
     cartDispatch({ type: "delete", payload: { id } })
   }
 
@@ -17,10 +19,7 @@ const Cart = ({showCart, setShowCart }) => {
       setEditQuantity(null)
     }
   }
-
-  useEffect(() => {
-    localStorage.setItem("products-cart", JSON.stringify(cart))
-  }, [cart])
+  
 
   return (
     <div className='cart'>

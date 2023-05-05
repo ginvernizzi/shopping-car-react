@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import ProductList from './components/ProductList'
 import CategoriesFilter from './components/CategoriesFilter'
@@ -7,9 +7,12 @@ import { parsePrice } from './utils/parsePrice'
 import Cart from './components/Cart'
 import { getProducts } from './services/products'
 import NavBar from './components/NavBar'
+import Login from './components/Login'
+import UserContext from './context/UserProvider'
 
 
 function App() {
+  const [user,] = useContext(UserContext)
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
@@ -40,8 +43,9 @@ function App() {
 
   return (
     <div className='App'>
-      <NavBar setShowCart={setShowCart} showCart={showCart}  />
+      <NavBar user={user} setShowCart={setShowCart} showCart={showCart}  />
       { showCart && <Cart setShowCart={setShowCart} showCart={showCart}/> }      
+      {!user && <Login /> }
       <CategoriesFilter setCategoryFilter={setCategoryFilter}/>
       <PriceFilter setPriceFilter={setPriceFilter} />
       <ProductList products={filterProducts} />

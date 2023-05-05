@@ -168,3 +168,9 @@
     transform: translateX(0);
   }
 }
+
+.login {
+  display: flex;
+  justify-content: center;
+  /* width: %; */
+}

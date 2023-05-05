@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import { createContext, useReducer } from "react";
+import { getMapUserCart, getUserCart } from '../services/carts'
+import { getProductById } from "../services/products";
 
 const CartContext = createContext();
 
 const initCart = () => {
-  const userCart = localStorage.getItem("products-cart");
-  return userCart === null ? { userId: 0, date: "", products: [] } : JSON.parse(userCart);
+  const user = localStorage.getItem("userKey");
+  // console.log("user localstoreages", JSON.parse(user));
+  const userCart = user === null ? { userId: 0, date: "", products: [] } : getUserCart(JSON.parse(user).id)
+    .then(res => res)
+
+  return userCart
 };
 
 export const CartProvider = ({ children }) => {
@@ -14,6 +20,8 @@ export const CartProvider = ({ children }) => {
   const cartReducer = (state, action) => {
     const { type, payload } = action;
     switch (type) {
+      case 'init':
+        return getMapUserCart(payload.id).then(resp => console.log('init', resp))
       case "add":
         if (state.products.length === 0) {
           const newCart = {
@@ -39,7 +47,7 @@ export const CartProvider = ({ children }) => {
           return prod.productId == payload.id ? { ...prod, quantity: prod.quantity - 1 } : prod
         })
 
-        return { ...state, products: products.filter(x => x.quantity > 0)}
+        return { ...state, products: products.filter(x => x.quantity > 0) }
       case "update":
         const productsNow = state.products.map(prod => {
           return prod.productId === payload.id ? { ...prod, quantity: payload.quantity } : prod

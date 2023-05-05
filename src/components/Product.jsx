@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react"
+import UserContext from "../context/UserProvider";
 import CartContext from "../context/CartProvider";
 
 const Product = ({ product }) => {
   const [, cartDispatch] = useContext(CartContext)
+  const [user,] = useContext(UserContext)
 
   const onAddToCart = (id, title, price) => {
     cartDispatch({ type: "add", payload: { id, title, price } })
@@ -18,7 +20,7 @@ const Product = ({ product }) => {
         <img src={product.image} alt="" />
       </div>
       <div className="product-footer">
-        <button className="btn-add" onClick={() => onAddToCart(product.id, product.title, product.price)} >Add to Cart </button>
+        {user ? <button className="btn-add" onClick={() => onAddToCart(product.id, product.title, product.price)} >Add to Cart </button> : <div>Debe loguearse para agregar al carrito</div>}
       </div>
     </div>
   )
